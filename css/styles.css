@@ -1,0 +1,9 @@
+.vista{
+    display: none;
+}
+.vista:nth-child(1){
+    display: flex;
+}
+.error{
+    border: 1px solid red;
+}
