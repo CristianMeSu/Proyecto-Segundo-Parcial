@@ -23,7 +23,7 @@ function login_usuarios(){
     session_start();
     global $conexion;
     extract($_POST);
-    $sql = "SELECT * from usuarios WHERE correo='$correo' and password='$password' ";
+    $sql = "SELECT * from empleados WHERE correo='$correo' and password='$password' ";
     $resultado = mysqli_query($conexion, $sql);
     $array= mysqli_fetch_array($resultado);
     if (mysqli_num_rows($resultado)>0){
