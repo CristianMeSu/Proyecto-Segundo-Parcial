@@ -63,6 +63,12 @@
                   <p>servicios</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="http://localhost/Proyecto-Segundo-Parcial/views/clientes/clientes.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>clientes</p>
+                </a>
+              </li>
              
             </ul>
           </li>
