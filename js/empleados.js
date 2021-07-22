@@ -17,7 +17,6 @@ function selectEmpleados(){
                     <td>${a.email}</td>
                     <td>${a.password}</td>
                     <td>${a.tipo}</td>
-                    <td>${a.status}</td>
                     <td>
                         <a href="#" style="color: yellow" data-id="${a.id}" class="editar">Editar</a> |
                         <a href="#" style="color: tomato" data-id="${a.id}" class="eliminar">Eliminar</a>
@@ -121,7 +120,7 @@ $(document).ready(function(){
             $('#email').val(response.email)
             $('#password').val(response.password)
             $('#tipo').val(response.tipo)
-            $('#status').val(response.status)
+           
         
         })
         

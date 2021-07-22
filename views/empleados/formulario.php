@@ -4,10 +4,7 @@
                 <div class="col-sm-6 offset-3 mt-6">
                     <form action="../../includes/_functions.php" method="POST" id="form">
                         <div class="row">
-                            <div class="mb-3">
-                                <label for="id" class="form-label">Id *</label>
-                                <input type="text" id="id" name="id" class="form-control">
-                            </div>
+                            
                             <div class="mb-3">
                                 <label for="nombre" class="form-label">Nombre *</label>
                                 <input type="text" id="nombre" name="nombre" class="form-control">
@@ -30,16 +27,28 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="mb-3">
-                                    <label for="tipo" class="form-label">Tipo *</label>
-                                    <input type="text" id="tipo" name="tipo" class="form-control">
+                                <label for="empleado" class="form-label">Empleado *</label>
+                                    <select id="empleado" name="empleado" class="form-control">
+                                        <option value="1" selected>--Seleccione--</option>
+                                        <?php
+                                        $sql="SELECT * FROM rol";
+                                        $empleado = mysqli_query($conexion, $sql);
+
+                                        if($empleado ->num_rows > 0)
+                                        {
+                                            foreach($empleado as $key => $row)
+                                            {
+                                        ?>  
+
+                                        <option value="<?php echo $row['id'] ?>"><?php echo $row['puesto'] ?></option>
+
+                                            <?php 
+                                            }
+                                        }?>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="mb-3">
-                                    <label for="status" class="form-label">Status *</label>
-                                    <input type="text" id="status" name="status" class="form-control">
-                                </div>
-                            </div>
+                            
                         </div>
                         <div class="mb-3">
                             <input type="hidden" name="accion" value="insertar_empleados">

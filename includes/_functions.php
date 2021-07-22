@@ -5,23 +5,23 @@ if(isset($_POST['accion'])){
     switch ($_POST['accion']) {
         
         case 'login_usuarios':
-            login_usuarios();
+        login_usuarios();
+        break;
+        case 'select_empleados':
+            select_empleados();
             break;
-            case 'select_empleados':
-                select_empleados();
-                break;
-            case 'consultar_empleados':
-                consultar_empleados();
-                break;
-            case 'insertar_empleados':
-                insertar_empleados();
-                break;
-            case 'eliminar_empleados':
-                eliminar_empleados();
-                break;
-            case 'editar_empleados':
-                editar_empleados();
-                break;
+        case 'consultar_empleados':
+            consultar_empleados();
+            break;
+        case 'insertar_empleados':
+            insertar_empleados();
+            break;
+        case 'eliminar_empleados':
+            eliminar_empleados();
+            break;
+        case 'editar_empleados':
+            editar_empleados();
+            break;
         case 'select_visitas':
             select_visitas();
             break;
@@ -75,13 +75,20 @@ elseif($id_login=1){
     header("Location: ../index.php");
     exit();
 }
+elseif($id_login=2){
+    global $conexion;
+    extract($_POST);
+    $consulta="UPDATE empleados SET status='1' WHERE id=$id";
+    mysqli_query($conexion,$consulta);
+    
+}
 
 function login_usuarios(){
 
     session_start();
     global $conexion;
     extract($_POST);
-    $sql = "SELECT * from empleados WHERE correo='$correo' and password='$password' ";
+    $sql = "SELECT * from empleados WHERE email='$correo' and password='$password' and status='1' ";
     $resultado = mysqli_query($conexion, $sql);
     $array= mysqli_fetch_array($resultado);
     if (mysqli_num_rows($resultado)>0){
@@ -111,7 +118,8 @@ function consultar_empleados(){
 };
 function select_empleados(){
     global $conexion;
-    $consulta = "SELECT * FROM empleados";
+    $consulta = "SELECT e.id, e.nombre , e.email, e.`password`, r.puesto as tipo 
+    FROM empleados e left join rol r on r.id = e.tipo";
     $resultado = mysqli_query($conexion,$consulta);
     $data = [];
     while ($row = mysqli_fetch_assoc($resultado)){
@@ -120,7 +128,6 @@ function select_empleados(){
         "email" => $row['email'],
         "password" => $row['password'],
         "tipo" => $row['tipo'],
-        "status" => $row['status'],
         "id" => $row['id'],
         ];
     }
@@ -130,8 +137,8 @@ function select_empleados(){
 function insertar_empleados(){
     global $conexion;
     extract($_POST);
-    $consulta = "INSERT INTO empleados (id, nombre, email, password, tipo, status ) 
-    values ('$id' '$nombre', '$email', '$password', '$tipo', '$status')";
+    $consulta = "INSERT INTO empleados ( nombre, email, password, tipo ) 
+    values ('$nombre', '$email', '$password', '$empleado')";
     $respuesta = [
         'type' => 'success',
         'title' => 'Operación exitosa',
@@ -145,7 +152,26 @@ function insertar_empleados(){
             'text' => mysqli_error($conexion)
         ];
     } 
-    echo json_encode($respuesta);      
+    echo json_encode($respuesta);
+
+    $to      = $email; // Enviar Email al usuario
+    $subject = 'Signup | Verification'; // Darle un asunto al correo electrónico
+    $message = '
+        Gracias por registrarte!
+        Tu cuenta ha sido creada, activala utilizando el enlace de la parte inferior.
+        
+        ------------------------
+        Nombre: '.$nombre.'
+        Correo: '.$email.'
+        Password: '.$password.'
+        ------------------------
+        
+        Por favor haz clic en este enlace para activar tu cuenta:
+        http://localhost/Proyecto-Segundo-Parcial/includes/_functions.php?id_login=2&id='.$id.'
+        
+        '; // Aqui se incluye la URL para ir al mensaje
+    $headers = 'From:noreply@proyectosegundoparcial.com' . "\r\n"; // Colocar el encabezado
+    mail($to, $subject, $message, $headers); // Enviar el correo electrónico    
 };
 function eliminar_empleados(){
     global $conexion;
@@ -163,8 +189,9 @@ function eliminar_empleados(){
             'title' => 'Operación exitosa',
             'text' => 'Se ha eliminado correctamente el servicio'
         ];
-    };
+    }
     echo json_encode($respuesta);
+    
 };
 function editar_empleados(){
     global $conexion;
