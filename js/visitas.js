@@ -16,6 +16,21 @@ function selectVisitas(){
                     <td>${a.servicio}</td>
                     <td>${a.empleado}</td>
                     <td>${a.registro}</td>
+                    <?php 
+                                    
+                    $diff = date_diff ($a.registro, $a.cita);
+                    if($diff<=15){?>
+                    <td style="color:#C70000">${a.cita}</td>
+                    <?php
+                    } elseif($diff<=5){?>
+                    <td style="color:#C76C00">${a.cita}</td>
+                    <?php
+                    }else{?>
+                        <td>${a.cita}</td>
+                    <?php
+                    }
+                    ?>
+                    
                     <td>
                         <a href="#" style="color: yellow" data-id="${a.id}" class="editar">Editar</a> |
                         <a href="#" style="color: tomato" data-id="${a.id}" class="eliminar">Eliminar</a>
@@ -36,7 +51,7 @@ $(document).ready(function(){
             accion: "insertar_visitas"
         }
         let bandera = 0;
-        $("#form").find('input').map(function(){ //se puede añadir select
+        $("#form").find('input, select').map(function(){ //se puede añadir select
             if($(this).val() == ''){
                 $(this).adClass('error')
                 bandera = 1;
@@ -83,9 +98,11 @@ $(document).ready(function(){
             .then(res => res.json())
             .then(response => {
                 alert(`${response.title}: ${response.text}`)
+                selectVisitas()
             })
             selectVisitas()
         }
+        
     })
     //EDITAR
     $('#table-visitas').on('click','.editar',function(e){
@@ -110,6 +127,7 @@ $(document).ready(function(){
             $('#servicio').val(response.servicio)
             $('#empleado').val(response.empleado)
             $('#registro').val(response.registro)
+            $('#cita').val(response.cita)
         
         })
         

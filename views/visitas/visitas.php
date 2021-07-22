@@ -37,6 +37,7 @@ require_once ("../../includes/_db.php");
                                     <th>Servicio</th>
                                     <th>Empleado</th>
                                     <th>Registro</th>
+                                    <th>Proxima Cita</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>

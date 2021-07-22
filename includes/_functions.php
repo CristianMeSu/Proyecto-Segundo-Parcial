@@ -71,9 +71,9 @@ function consultar_visitas(){
     $resultado = mysqli_query($conexion,$consulta);
     $row = mysqli_fetch_assoc($resultado);
     $data = [
-        "cliente" => $row['cliente'],
-        "servicio" => $row['servicio'],
-        "empleado" => $row['empleado'],
+        "cliente" => $row['cliente_id'],
+        "servicio" => $row['servicio_id'],
+        "empleado" => $row['empleado_id'],
         "registro" => $row['registro'],
         "id" => $row['id'],
         
@@ -83,16 +83,23 @@ function consultar_visitas(){
 };
 function select_visitas(){
     global $conexion;
-    $consulta = "SELECT * FROM visitas";
+    $consulta = "SELECT c.nombre as cliente, e.nombre as empleado, s.nombre as servicio, v.id, v.registro, v.cita FROM visitas v
+    LEFT JOIN clientes c ON c.id = v.cliente_id
+    LEFT JOIN empleados e ON e.id = v.empleado_id
+    LEFT JOIN servicios s ON s.id = v.servicio_id order by v.cita asc;";
     $resultado = mysqli_query($conexion,$consulta);
+    
     $data = [];
     while ($row = mysqli_fetch_assoc($resultado)){
         $data[] = [
             "cliente" => $row['cliente'],
-            "servicio" => $row['servicio'],
             "empleado" => $row['empleado'],
+            "servicio" => $row['servicio'],
             "registro" => $row['registro'],
+            "cita" => $row['cita'],
             "id" => $row['id'],
+                
+
         ];
     }
     echo json_encode($data);
@@ -101,8 +108,8 @@ function select_visitas(){
 function insertar_visitas(){
     global $conexion;
     extract($_POST);
-    $consulta = "INSERT INTO visitas (cliente, servicio, empleado) 
-    values ('$cliente', '$servicio', '$empleado')";
+    $consulta = "INSERT INTO visitas (cliente_id, servicio_id, empleado_id, cita) 
+    values ('$cliente', '$servicio', '$empleado', CURDATE()+ INTERVAL 30 DAY) ";
     $respuesta = [
         'type' => 'success',
         'title' => 'Operación exitosa',
