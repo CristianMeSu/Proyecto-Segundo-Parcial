@@ -34,7 +34,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="status" class="form-label">Status *</label>
-                            <input type="text" id="status" name="status" class="form-control">
+                            <input type="null" id="status" name="status" class="form-control">
                             <input type="hidden" name="accion" value="insertar_clientes">
                         </div>
                         <div class="mb-3">
