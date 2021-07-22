@@ -1,7 +1,7 @@
 <?php
 $id= $_GET['id'];
 require_once ("../../includes/_db.php");
-$consulta="SELECT * FROM usuarios WHERE id=$id";
+$consulta="SELECT * FROM empleados WHERE id=$id";
 $resultado = mysqli_query($conexion, $consulta);
 $usuario = mysqli_fetch_assoc($resultado);
 ?>
@@ -19,7 +19,7 @@ $usuario = mysqli_fetch_assoc($resultado);
         <div class="col-sm-1"></div>
         <div class=" col-sm-8 mb-3 ">
           
-            <h1>Editar Usuarios</h1>
+            <h1>Editar empleados</h1>
             
         </div>
             <div class="col-sm-11 offset-sm-1">

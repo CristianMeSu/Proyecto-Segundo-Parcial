@@ -57,7 +57,7 @@ function login_usuarios(){
     $array= mysqli_fetch_array($resultado);
     if (mysqli_num_rows($resultado)>0){
         $_SESSION ['username']=$array['nombre'];
-        header("Location: ../views/usuarios/");
+        header("Location: ../views/empleados/");
 
     }
     else{

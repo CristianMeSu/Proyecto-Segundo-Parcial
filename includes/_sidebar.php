@@ -52,9 +52,9 @@
             </a>
             <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="http://localhost/Proyecto-Segundo-Parcial/views/usuarios/index.php" class="nav-link">
+                <a href="http://localhost/Proyecto-Segundo-Parcial/views/empleados/empleados.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Empleados</p>
+                  <p>empleados</p>
                 </a>
               </li>
               <li class="nav-item">
