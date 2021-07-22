@@ -1,25 +1,23 @@
-function selectData(adicional = ''){
+function selectClientes(){
     //petición AJAX
     const obj= {
         accion: 'select_clientes'
     };
-    if(adicional != ''){
-        obj['type'] = adicional.type
-        obj['valor'] = adicional.valor
-        obj['campo'] = adicional.campo
-    }
     $.post( 
         "../../includes/_functions.php", 
         obj, 
         function(response){
             let html = ``;
             response.map(function(a,b){
-                
+                console.log(a,b);
                 html += `
                 <tr style="Color:#FFFFFF">
                     <td>${a.nombre}</td>
                     <td>${a.telefono}</td>
                     <td>${a.correo}</td>
+                    <td>${a.direccion}</td>
+                    <td>${a.registro}</td>
+                    <td>${a.status}</td>
                     <td>
                         <a href="#" style="color: yellow" data-id="${a.id}" class="editar">Editar</a> |
                         <a href="#" style="color: tomato" data-id="${a.id}" class="eliminar">Eliminar</a>
@@ -27,12 +25,12 @@ function selectData(adicional = ''){
                 </tr>
                 `
             })
-            $("#table-data tbody").html(html);
+            $("#table-clientes tbody").html(html);
         },
         'JSON');
 }
 $(document).ready(function(){
-    selectData();
+    selectClientes();
     $("#btnSubmit").click(function(){
         let obj = {
             accion: "insertar_clientes"
@@ -54,21 +52,19 @@ $(document).ready(function(){
             obj['accion'] = 'editar_clientes';
             obj['id'] = $(this).data('editar');
         }
-        if($(this).on('#ordenar')){
-            obj['accion'] = 'ordenar_clientes_ASC';
-            
-        }
         $.post('../../includes/_functions.php', obj, function(response){
             if(response.type == 'success'){
                 toggleForm($("#showForm"))
-                selectData()
+                selectClientes()
             }
             alert(`${response.title}, ${response.text}`)
         },'JSON')
+        $("#form").find('input').keyup(function(){
+            $(this).removeClass('error');
     })
-    
+})
     //ELIMINAR
-    $("#table-data").on('click','.eliminar', function(e){ // e = accion de hipervinculo || datos reales
+    $("#table-clientes").on('click','.eliminar', function(e){ // e = accion de hipervinculo || datos reales
         e.preventDefault()
         const id = $(this).data('id')
         
@@ -86,12 +82,13 @@ $(document).ready(function(){
             .then(res => res.json())
             .then(response => {
                 alert(`${response.title}: ${response.text}`)
-                selectData()
+                selectClientes()
             })   
+            selectClientes()
         }
     }) 
     //EDITAR
-    $('#table-data').on('click','.editar',function(e){
+    $('#table-clientes').on('click','.editar',function(e){
         e.preventDefault()
         const id = $(this).data('id')
         console.log(id)
@@ -111,21 +108,10 @@ $(document).ready(function(){
             $('#nombre').val(response.nombre)
             $('#correo').val(response.correo)
             $('#telefono').val(response.telefono)
+            $('#direccion').val(response.direccion)
+            $('#registro').val(response.registro)
+            $('#status').val(response.status)
         })
     });
-    //ORDENAR
-    $('#ordenar').change(function(){
-        const valor = $(this).val()
-        selectData({type: 'ordenamiento', valor})
-        
-    })
-    //BUSCAR
-    $('#btnBuscar').click(function(){
-        const valor = $('#buscar').val()
-        const campo = $('#campo').val()
-        selectData({type: 'buscar', valor, campo: campo})
-        $('#campo').val('')
-        $('#buscar').val('')
-        
-    })
+  
 });

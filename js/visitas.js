@@ -17,10 +17,6 @@ function selectVisitas(){
                 if (a.date <=5) {
                 color = "tomato"    
                 } 
-                    
-                {
-
-                }
                 html += `
                 <tr style="Color:#FFFFFF">
                     <td>${a.cliente}</td>
@@ -113,7 +109,6 @@ $(document).ready(function(){
         console.log(id)
         $("#showForm").trigger('click')
         $('#btnSubmit').text('Editar').data('editar', id)
-        
         let formularioDatos = new FormData();
         formularioDatos.append('accion', 'consultar_visitas');
         formularioDatos.append('id', id);

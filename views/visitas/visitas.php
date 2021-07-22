@@ -25,7 +25,6 @@ require_once ("../../includes/_db.php");
                 <a href="#" class="btn btn-primary" id="showForm">Insertar</a>
             </div>
         </div>
-
         <div class="vistas ">
             <div class="row vista" id="vista_principal">
                 <div class="col-sm-11 offset-sm-1">

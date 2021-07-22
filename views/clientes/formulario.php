@@ -1,4 +1,4 @@
-<div class="row vista_" id="vista_edicion_">
+<div class="row vista" id="vista_edicion">
         <div class="col-sm-11 offset-sm-1">
             
                 <div class="col-sm-6 offset-3 mt-6">

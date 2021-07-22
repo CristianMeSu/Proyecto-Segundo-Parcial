@@ -25,11 +25,11 @@ require_once ("../../includes/_db.php");
                 <a href="#" class="btn btn-primary" id="showForm">Insertar</a>
             </div>
         </div>
-        <div class="vistas_">
-            <div class="row vista_clientes" id="vista_principal_">
+        <div class="vistas">
+            <div class="row vista" id="vista_principal">
                 <div class="col-sm-11 offset-sm-1">
                     <div class="table-responsive">
-                        <table class="table table-striped table-hover " id="table-data">
+                        <table class="table table-striped table-hover " id="table-clientes">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -37,7 +37,7 @@ require_once ("../../includes/_db.php");
                                     <th>Correo</th>
                                     <th>Direccion</th>
                                     <th>Registro</th>
-                                    <th>Status</th>
+                                    <th>Visitas</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>

@@ -52,6 +52,20 @@ if(isset($_POST['accion'])){
         case 'editar_servicios':
             editar_servicios();
             break;
+        case 'select_clientes':
+            select_clientes();    
+            break;
+        case 'editar_clientes':
+            editar_clientes();
+            break;
+        case 'insertar_clientes':
+            insertar_clientes();
+            break;
+        case 'eliminar_clientes':
+            eliminar_clientes();
+            break;
+        case 'consultar_clientes':
+            consultar_clientes();
     } 
 }
 
@@ -364,4 +378,110 @@ function editar_servicios(){
     };
     echo json_encode($respuesta);
 }
+function consultar_clientes(){
+    global $conexion;
+    $id = $_POST['id'];
+    $consulta = "SELECT * FROM clientes WHERE id = $id";
+    $resultado = mysqli_query($conexion,$consulta);
+    $row = mysqli_fetch_assoc($resultado);
+    $data = [
+        "nombre" => $row['nombre'],
+        "correo" => $row['correo'],
+        "telefono" => $row['telefono'],
+        "direccion" => $row['direccion'],
+        "registro" => $row['registro'],
+        "status" => $row['status'],
+        "id" => $row['id'],
+    ];
+    echo json_encode($data);
+}
+function select_clientes(){
+    global $conexion;
+    $consulta = "SELECT * FROM clientes ";
+    $resultado = mysqli_query($conexion,$consulta);
+    $data = [];
+    while ($row = mysqli_fetch_assoc($resultado)){ 
+        $data[] = [
+            "nombre" => $row['nombre'],
+            "correo" => $row['correo'],
+            "telefono" => $row['telefono'],
+            "direccion" => $row['direccion'],
+            "registro" => $row['registro'],
+            "status" => $row['status'],
+            "id" => $row['id'],
+        ];
+    };
+    echo json_encode($data);
+};
+function insertar_clientes(){
+    global $conexion;
+    extract($_POST);
+    $consulta_duplicado="SELECT * FROM clientes WHERE nombre='$nombre' and correo='$correo' and telefono='$telefono' and direccion='$direccion' and registro='$registro
+     and status='$status'";
+    $resultado = mysqli_query($conexion, $consulta_duplicado);
+    if (mysqli_num_rows($resultado)>0) {
+        echo "
+    <p class='avisos'>El nombre del cliente ya esta registrado</p>
+    <p class='avisos'><a href='javascript:history.go(-1)' class='clase1'>Volver atrás</a></p>
+    ";
+    }
+    else{
+        $consulta = "INSERT INTO clientes (nombre, correo, telefono, direccion, registro, status) values ('$nombre', '$correo', '$telefono', '$direccion', '$registro', '$status')";
+        $respuesta = [
+            'type' => 'success',
+            'title' => 'Operación exitosa',
+            'text' => 'Se ha insertado correctamente el registro del cliente'
+        ];
+        if(!mysqli_query($conexion, $consulta)){
+            $respuesta = [
+                'type' => 'error',
+                'title' => 'Operación fallida',
+                'text' => mysqli_error($conexion)
+            ];
+        }
+        echo json_encode($respuesta);       
+    }
+};
+function editar_clientes(){
+    global $conexion;
+    extract($_POST);
+    //crear una cadena de texto para UPDATE
+    $consulta = "UPDATE clientes SET nombre='$nombre', correo='$correo', telefono='$telefono', direccion='$direccion',
+     registro='$registro', status='$status' WHERE id=$id";
+    //ejecutar la consulta
+    mysqli_query($conexion, $consulta);
+    $respuesta = [
+        'type' => 'success',
+        'title' => 'Operación exitosa',
+        'text' => 'Se ha editado correctamente el registro del cliente'
+        ];
+    if(mysqli_affected_rows($conexion) > 0){
+        $respuesta = [
+            'type' => 'error',
+            'title' => 'Operación fallida',
+            'text' => mysqli_error($conexion)
+        ];
+    };
+    echo json_encode($respuesta);
+    
+}
+function eliminar_clientes(){
+    global $conexion;
+    $id=$_POST['id'];
+    $consulta="DELETE FROM clientes WHERE id= $id";
+    mysqli_query($conexion,$consulta);
+    $respuesta = [
+        'type' => 'success',
+        'title' => 'Operación exitosa',
+        'text' => 'Se ha eliminado correctamente el registro del cliente'
+    ];
+    if(!mysqli_query($conexion, $consulta)){
+        $respuesta = [
+            'type' => 'error',
+            'title' => 'Operación fallida',
+            'text' => mysqli_error($conexion)
+        ];
+    }
+        echo json_encode($respuesta);  
+};
 ?>
