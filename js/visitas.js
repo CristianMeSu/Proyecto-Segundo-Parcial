@@ -10,24 +10,28 @@ function selectVisitas(){
             let html = ``;
             response.map(function(a,b){
                 console.log(a,b);
+                var color=""
+                if(a.date <=15){
+                color = "#E07D07"
+                }
+                if (a.date <=5) {
+                color = "tomato"    
+                } 
+                    
+                {
+
+                }
                 html += `
                 <tr style="Color:#FFFFFF">
                     <td>${a.cliente}</td>
                     <td>${a.servicio}</td>
                     <td>${a.empleado}</td>
                     <td>${a.registro}</td>
-                    <?php 
-                    if(${a.date}<=15){?>
-                    <td style="color:#C76C00">${a.cita}</td>
-                    <?php
-                    } elseif(${a.date}<=5){?>
-                    <td style="color:#C70000">${a.cita}</td>
-                    <?php
-                    }else{?>
-                        <td>${a.cita}</td>
-                    <?php
-                    }
-                    ?>
+                    
+                    <td style="color: ${color}">${a.cita}</td>
+                    
+                    
+                    
                     
                     <td>
                         <a href="#" style="color: yellow" data-id="${a.id}" class="editar">Editar</a> |

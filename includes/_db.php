@@ -3,9 +3,7 @@
 $host = "sql5.freemysqlhosting.net";
 $user = "sql5425622";
 $password = "xxBlTNGtUr";
-
 $database = "sql5425622";
-
 $port = "3306";
 
 $conexion = mysqli_connect($host, $user, $password, $database, $port);
