@@ -32,9 +32,11 @@ require_once ("../../includes/_db.php");
                         <table class="table table-striped table-hover " id="table-empleados">
                             <thead>
                                 <tr>
+                                    <th>Id</th>
                                     <th>Nombre</th>
                                     <th>Email</th>
-                                    <th>Telefono</th>
+                                    <th>password</th>
+                                    <th>tipo</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>

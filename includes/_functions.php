@@ -7,6 +7,21 @@ if(isset($_POST['accion'])){
         case 'login_usuarios':
             login_usuarios();
             break;
+            case 'select_empleados':
+                select_empleados();
+                break;
+            case 'consultar_empleados':
+                consultar_empleados();
+                break;
+            case 'insertar_empleados':
+                insertar_empleados();
+                break;
+            case 'eliminar_empleados':
+                eliminar_empleados();
+                break;
+            case 'editar_empleados':
+                editar_empleados();
+                break;
         case 'select_visitas':
             select_visitas();
             break;
@@ -64,6 +79,100 @@ function login_usuarios(){
         echo "Datos incorrectos";
     }
 }
+function consultar_empleados(){
+    global $conexion;
+    $id = $_POST['id'];
+    $consulta = "SELECT * FROM empleados WHERE id = $id";
+    $resultado = mysqli_query($conexion,$consulta);
+    $row = mysqli_fetch_assoc($resultado);
+    $data = [
+        "nombre" => $row['nombre'],
+        "email" => $row['email'],
+        "password" => $row['password'],
+        "tipo" => $row['tipo'],
+        "status" => $row['status'],
+        "id" => $row['id'],  
+    ];
+    echo json_encode($data);
+};
+function select_empleados(){
+    global $conexion;
+    $consulta = "SELECT * FROM empleados";
+    $resultado = mysqli_query($conexion,$consulta);
+    $data = [];
+    while ($row = mysqli_fetch_assoc($resultado)){
+        $data[] = [
+        "nombre" => $row['nombre'],
+        "email" => $row['email'],
+        "password" => $row['password'],
+        "tipo" => $row['tipo'],
+        "status" => $row['status'],
+        "id" => $row['id'],
+        ];
+    }
+    echo json_encode($data);
+};
+
+function insertar_empleados(){
+    global $conexion;
+    extract($_POST);
+    $consulta = "INSERT INTO empleados (id, nombre, email, password, tipo, status ) 
+    values ('$id' '$nombre', '$email', '$password', '$tipo', '$status')";
+    $respuesta = [
+        'type' => 'success',
+        'title' => 'Operación exitosa',
+        'text' => 'Se ha insertado correctamente el registro'
+    ];
+    
+    if(!mysqli_query($conexion, $consulta)){
+        $respuesta = [
+            'type' => 'error',
+            'title' => 'Operación fallida',
+            'text' => mysqli_error($conexion)
+        ];
+    } 
+    echo json_encode($respuesta);      
+};
+function eliminar_empleados(){
+    global $conexion;
+    extract($_POST);
+    $consulta="DELETE FROM empleados WHERE id=$id";
+    mysqli_query($conexion,$consulta);
+    $respuesta = [
+        'type' => 'error',
+        'title' => 'Operación fallida',
+        'text' => mysqli_error($conexion)
+    ];
+    if(mysqli_affected_rows($conexion) > 0){
+        $respuesta = [
+            'type' => 'success',
+            'title' => 'Operación exitosa',
+            'text' => 'Se ha eliminado correctamente el servicio'
+        ];
+    };
+    echo json_encode($respuesta);
+};
+function editar_empleados(){
+    global $conexion;
+    extract($_POST);
+    $consulta="UPDATE empleados SET nombre='$nombre',email='$email', password='$password', tipo='$tipo', status='$status' WHERE id=$id";
+    mysqli_query($conexion,$consulta);
+    $respuesta = [ 
+        'type' => 'error',
+        'title' => 'Operación fallida',
+        'text' => mysqli_error($conexion)
+    ];
+    if(mysqli_affected_rows($conexion) > 0){
+        $respuesta = [
+            'type' => 'success',
+            'title' => 'Operación exitosa',
+            'text' => 'Se ha editado correctamente el producto'
+            
+        ];
+    };
+    echo json_encode($respuesta);
+}
+
 function consultar_visitas(){
     global $conexion;
     $id = $_POST['id'];

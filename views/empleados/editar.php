@@ -3,7 +3,7 @@ $id= $_GET['id'];
 require_once ("../../includes/_db.php");
 $consulta="SELECT * FROM empleados WHERE id=$id";
 $resultado = mysqli_query($conexion, $consulta);
-$usuario = mysqli_fetch_assoc($resultado);
+$empleados = mysqli_fetch_assoc($resultado);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,26 +26,26 @@ $usuario = mysqli_fetch_assoc($resultado);
             <form action="../../includes/_functions.php" method="POST">
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre *</label>
-                    <input type="text" id="nombre" name="nombre" class="form-control" value="<?php echo $usuario['nombre'];?>">
+                    <input type="text" id="nombre" name="nombre" class="form-control" value="<?php echo $empleados['nombre'];?>">
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="correo" class="form-label">Correo Electrónico *</label>
-                            <input type="email" id="correo" name="correo" class="form-control" value="<?php echo $usuario['correo'];?>">
+                            <input type="email" id="correo" name="correo" class="form-control" value="<?php echo $empleados['correo'];?>">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="password" class="form-label">Password *</label>
-                            <input type="password" id="password" name="password" class="form-control" value="<?php echo $usuario['password'];?>">
+                            <input type="password" id="password" name="password" class="form-control" value="<?php echo $empleados['password'];?>">
                         </div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="telefono" class="form-label">Telefono *</label>
-                    <input type="tel" id="telefono" name="telefono" class="form-control" value="<?php echo $usuario['telefono'];?>">
-                    <input type="hidden" name="accion" value="editar_usuario">
+                    <input type="tel" id="telefono" name="telefono" class="form-control" value="<?php echo $empleados['telefono'];?>">
+                    <input type="hidden" name="accion" value="editar_empleados">
                     <input type="hidden" name="id" value="<?php echo $id;?>">
                 </div>
                 <div class="mb-3">
