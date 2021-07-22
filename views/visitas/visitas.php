@@ -1,5 +1,6 @@
 <?php
 require_once ("../../includes/_db.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,22 +30,22 @@ require_once ("../../includes/_db.php");
                 <label for="ordenar" class="form-label">Ordenar por: </label>
                 <select name="ordenar" class="form-control" id="ordenar">
                     <option value="" selected disabled>----- Selecciona -----</option>
-                    <option value="NOM_ASC">Nombre Ascendente</option>
-                    <option value="NOM_DESC">Nombre Descendente</option>
-                    <option value="EMAIL_ASC">Correo Ascendente</option>
-                    <option value="EMAIL_DESC">Correo Descendente</option>
+                    <option value="NOM_ASC">Cliente Ascendente</option>
+                    <option value="NOM_DESC">Cliente Descendente</option>
+                    <option value="EMAIL_ASC">Servicio Ascendente</option>
+                    <option value="EMAIL_DESC">Servicio Descendente</option>
                 </select>
             </div>
             <div class="col-sm-2">
-                <label for="buscar" class="form-label">Burcar:</label>
+                <label for="buscar" class="form-label">Buscar:</label>
                 <input type="text" id="buscar" name="buscar" class="form-control">
             </div>
             <div class="col-sm-2">
                 <label for="buscar" class="form-label">Campo:</label>
                 <select type="text" id="campo" name="campo" class="form-control">
                     <option value="" selected disabled>----- Selecciona -----</option>
-                    <option value="CAMP_NOM">Nombre</option>
-                    <option value="CAMP_EMAIL">Correo</option>
+                    <option value="CAMP_NOM">Cliente</option>
+                    <option value="CAMP_EMAIL">Servicio</option>
                 </select>
             </div>
             <div class="col-sm-3">
@@ -52,7 +53,7 @@ require_once ("../../includes/_db.php");
                 <button id="btnBuscar" class="btn btn-info">Buscar</button>
             </div>
         </div>
-        <div class="vistas">
+        <div class="vistas ">
             <div clas="row vista" id="vista_principal">
                 <div class="col-sm-11 offset-sm-1">
                     <div class="table-responsive">

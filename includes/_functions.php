@@ -22,6 +22,21 @@ if(isset($_POST['accion'])){
         case 'editar_visitas':
             editar_visitas();
             break;
+        case 'select_servicios':
+            select_servicios();
+            break;
+        case 'consultar_servicios':
+            consultar_servicios();
+            break;
+        case 'insertar_servicios':
+            insertar_servicios();
+            break;
+        case 'eliminar_servicios':
+            eliminar_servicios();
+            break;
+        case 'editar_servicios':
+            editar_servicios();
+            break;
     } 
 }
 
@@ -117,7 +132,7 @@ function eliminar_visitas(){
         $respuesta = [
             'type' => 'success',
             'title' => 'Operación exitosa',
-            'text' => 'Se ha eliminado correctamente el producto'
+            'text' => 'Se ha eliminado correctamente la visita'
         ];
     };
     echo json_encode($respuesta);
@@ -127,6 +142,95 @@ function editar_visitas(){
     extract($_POST);
     $consulta="UPDATE visitas SET cliente='$cliente',servicio='$servicio',empleado='$empleado',
     registro='$registro'  WHERE id=$id";
+    mysqli_query($conexion,$consulta);
+    $respuesta = [ 
+        'type' => 'error',
+        'title' => 'Operación fallida',
+        'text' => mysqli_error($conexion)
+    ];
+    if(mysqli_affected_rows($conexion) > 0){
+        $respuesta = [
+            'type' => 'success',
+            'title' => 'Operación exitosa',
+            'text' => 'Se ha editado correctamente el producto'
+            
+        ];
+    };
+    echo json_encode($respuesta);
+}
+function consultar_servicios(){
+    global $conexion;
+    $id = $_POST['id'];
+    $consulta = "SELECT * FROM servicios WHERE id = $id";
+    $resultado = mysqli_query($conexion,$consulta);
+    $row = mysqli_fetch_assoc($resultado);
+    $data = [
+        "nombre" => $row['nombre'],
+        "precio" => $row['precio'],
+        "id" => $row['id'],
+        
+    ];
+    echo json_encode($data);
+   
+};
+function select_servicios(){
+    global $conexion;
+    $consulta = "SELECT * FROM servicios";
+    $resultado = mysqli_query($conexion,$consulta);
+    $data = [];
+    while ($row = mysqli_fetch_assoc($resultado)){
+        $data[] = [
+            "nombre" => $row['nombre'],
+            "precio" => $row['precio'],
+            "id" => $row['id'],
+        ];
+    }
+    echo json_encode($data);
+   
+};
+function insertar_servicios(){
+    global $conexion;
+    extract($_POST);
+    $consulta = "INSERT INTO servicios (nombre, precio) 
+    values ('$nombre', '$precio')";
+    $respuesta = [
+        'type' => 'success',
+        'title' => 'Operación exitosa',
+        'text' => 'Se ha insertado correctamente el registro'
+    ];
+    
+    if(!mysqli_query($conexion, $consulta)){
+        $respuesta = [
+            'type' => 'error',
+            'title' => 'Operación fallida',
+            'text' => mysqli_error($conexion)
+        ];
+    } 
+    echo json_encode($respuesta);      
+};
+function eliminar_servicios(){
+    global $conexion;
+    extract($_POST);
+    $consulta="DELETE FROM servicios WHERE id=$id";
+    mysqli_query($conexion,$consulta);
+    $respuesta = [
+        'type' => 'error',
+        'title' => 'Operación fallida',
+        'text' => mysqli_error($conexion)
+    ];
+    if(mysqli_affected_rows($conexion) > 0){
+        $respuesta = [
+            'type' => 'success',
+            'title' => 'Operación exitosa',
+            'text' => 'Se ha eliminado correctamente el servicio'
+        ];
+    };
+    echo json_encode($respuesta);
+};
+function editar_servicios(){
+    global $conexion;
+    extract($_POST);
+    $consulta="UPDATE servicios SET nombre='$nombre',precio='$precio' WHERE id=$id";
     mysqli_query($conexion,$consulta);
     $respuesta = [ 
         'type' => 'error',

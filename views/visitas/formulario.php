@@ -5,26 +5,25 @@
                 <div class="col-sm-6 offset-3 mt-6">
                     <form action="../../includes/_functions.php" method="POST" id="form">
                         <div class="mb-3">
-                            <label for="nombre" class="form-label">Cliente *</label>
+                            <label for="cliente" class="form-label">Cliente *</label>
                             <input type="text" id="cliente" name="cliente" class="form-control">
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="mb-3">
-                                    <label for="correo" class="form-label">Servicio</label>
-                                    <input type="email" id="servicio" name="servicio" class="form-control">
+                                    <label for="servicio" class="form-label">Servicio</label>
+                                    <input type="text" id="servicio" name="servicio" class="form-control">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">Empleado *</label>
-                                    <input type="password" id="empleado" name="empleado" class="form-control">
+                                    <label for="empleado" class="form-label">Empleado *</label>
+                                    <input type="text" id="empleado" name="empleado" class="form-control">
                                 </div>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="telefono" class="form-label">Registro</label>
-                            <input type="tel" id="registro" name="registro" class="form-control">
+                            
                             <input type="hidden" name="accion" value="insertar_visitas">
                         </div>
                         <div class="mb-3">

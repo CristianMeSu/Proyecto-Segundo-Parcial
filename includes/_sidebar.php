@@ -51,6 +51,12 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="http://localhost/Proyecto-Segundo-Parcial/views/usuarios/index.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Empleados</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="http://localhost/Proyecto-Segundo-Parcial/views/visitas/visitas.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>

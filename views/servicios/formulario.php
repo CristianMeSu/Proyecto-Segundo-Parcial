@@ -11,24 +11,17 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="mb-3">
-                                    <label for="correo" class="form-label">Correo Electrónico *</label>
-                                    <input type="email" id="correo" name="correo" class="form-control">
+                                    <label for="precio" class="form-label">Precio</label>
+                                    <input type="text" id="precio" name="precio" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="mb-3">
-                                    <label for="password" class="form-label">Password *</label>
-                                    <input type="password" id="password" name="password" class="form-control">
-                                </div>
-                            </div>
+                            
                         </div>
                         <div class="mb-3">
-                            <label for="telefono" class="form-label">Telefono *</label>
-                            <input type="tel" id="telefono" name="telefono" class="form-control">
-                            <input type="hidden" name="accion" value="insertar_usuarios">
+                            <input type="hidden" name="accion" value="insertar_servicios">
                         </div>
                         <div class="mb-3">
-                            <button type="button" class="btn btn-success" id="btnSubmit">Guardar</button>
+                        <button type="button" class="btn btn-success" id="btnSubmit">Guardar</button>
                         </div>
                     </form>    
                 </div>
