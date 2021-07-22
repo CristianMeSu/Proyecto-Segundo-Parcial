@@ -54,7 +54,7 @@ require_once ("../../includes/_db.php");
             </div>
         </div>
         <div class="vistas_">
-            <div clas="row vista_clientes" id="vista_principal_">
+            <div class="row vista_clientes" id="vista_principal_">
                 <div class="col-sm-11 offset-sm-1">
                     <div class="table-responsive">
                         <table class="table table-striped table-hover " id="table-data">
