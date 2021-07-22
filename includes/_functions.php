@@ -86,7 +86,8 @@ function select_visitas(){
     $consulta = "SELECT c.nombre as cliente, e.nombre as empleado, s.nombre as servicio, v.id, v.registro, v.cita FROM visitas v
     LEFT JOIN clientes c ON c.id = v.cliente_id
     LEFT JOIN empleados e ON e.id = v.empleado_id
-    LEFT JOIN servicios s ON s.id = v.servicio_id order by v.cita asc;";
+    LEFT JOIN servicios s ON s.id = v.servicio_id 
+    UNION SELECT DATEDIFF(CURDATE(), cita ) as DateDif, cita from visitas order by v.cita asc;";
     $resultado = mysqli_query($conexion,$consulta);
     
     $data = [];
@@ -98,6 +99,7 @@ function select_visitas(){
             "registro" => $row['registro'],
             "cita" => $row['cita'],
             "id" => $row['id'],
+            "date" => $row['DateDif'],
                 
 
         ];

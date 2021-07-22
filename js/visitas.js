@@ -17,13 +17,11 @@ function selectVisitas(){
                     <td>${a.empleado}</td>
                     <td>${a.registro}</td>
                     <?php 
-                                    
-                    $diff = date_diff ($a.registro, $a.cita);
-                    if($diff<=15){?>
-                    <td style="color:#C70000">${a.cita}</td>
-                    <?php
-                    } elseif($diff<=5){?>
+                    if(${a.date}<=15){?>
                     <td style="color:#C76C00">${a.cita}</td>
+                    <?php
+                    } elseif(${a.date}<=5){?>
+                    <td style="color:#C70000">${a.cita}</td>
                     <?php
                     }else{?>
                         <td>${a.cita}</td>
