@@ -66,6 +66,8 @@ if(isset($_POST['accion'])){
             break;
         case 'consultar_clientes':
             consultar_clientes();
+        case 'mostrar_servicios':
+            mostrar_servicios();
     } 
 }
 
@@ -261,6 +263,8 @@ function insertar_visitas(){
     extract($_POST);
     $consulta = "INSERT INTO visitas (cliente_id, servicio_id, empleado_id, cita) 
     values ('$cliente', '$servicio', '$empleado', CURDATE()+ INTERVAL 30 DAY) ";
+    $consulta2 = "UPDATE clientes SET status = status+1 WHERE id= $cliente;";
+    mysqli_query($conexion, $consulta2);
     $respuesta = [
         'type' => 'success',
         'title' => 'Operación exitosa',
@@ -510,5 +514,22 @@ function eliminar_clientes(){
         ];
     }
         echo json_encode($respuesta);  
+};
+function mostrar_servicios(){
+    global $conexion;
+    $id=$_POST['id'];
+    $consulta="SELECT c.nombre as cliente,  s.nombre as servicio, v.registro FROM visitas v
+    LEFT JOIN clientes c ON c.id = v.cliente_id
+    LEFT JOIN servicios s ON s.id = v.servicio_id WHERE v.cliente_id=$id order by v.registro desc";
+    $resultado = mysqli_query($conexion,$consulta);
+    $data = [];
+    while ($row = mysqli_fetch_assoc($resultado)){ 
+        $data[] = [
+            "cliente" => $row['cliente'],
+            "servicio" => $row['servicio'],
+            "registro" => $row['registro']
+        ];
+    };
+    echo json_encode($data);
 };
 ?>

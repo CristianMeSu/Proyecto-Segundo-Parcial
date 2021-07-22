@@ -13,7 +13,7 @@ function selectEmpleados(){
                 html += `
                 <tr style="Color:#FFFFFF">
                     <td>${a.id}</td>
-                    <td>${a.nombre}</td>
+                    <td><a href="#" style="color: #15A145" data-id="${a.id}" class="mostrar">${a.nombre}</a></td>
                     <td>${a.email}</td>
                     <td>${a.password}</td>
                     <td>${a.tipo}</td>
@@ -55,6 +55,7 @@ $(document).ready(function(){
             obj['id'] = $(this).data('editar');
         }
 
+
     
         $.post('../../includes/_functions.php', obj, function(response){
             if(response.type == 'success'){
@@ -67,12 +68,9 @@ $(document).ready(function(){
             $(this).removeClass('error');
     })
 
-
-    
-   
-    
-
     })
+    
+    
     //ELIMINAR
     $("#table-empleados").on('click','.eliminar', function(e){ // e = accion de hipervinculo || datos reales
         e.preventDefault()
@@ -126,3 +124,14 @@ $(document).ready(function(){
         
     });
 });
+
+$("#table-empleados").on('click','.mostrar', function(e){ // e = accion de hipervinculo || datos reales
+    e.preventDefault()
+    const id = $(this).data('id')
+    let formularioDatos = new FormData();
+    formularioDatos.append('accion', 'mostrar_servicios');
+    formularioDatos.append('id', id);
+    
+        
+      
+    });
