@@ -17,7 +17,7 @@ require_once ("../../includes/_db.php");
         <div class="col-sm-1"></div>
         <div class=" col-sm-8 mb-3 ">
           
-            <h1>Usuarios</h1>
+            <h1>Empleados</h1>
             
         </div>
         <div class="col-sm-3">
@@ -25,18 +25,16 @@ require_once ("../../includes/_db.php");
                 <a href="#" class="btn btn-primary" id="showForm">Insertar</a>
             </div>
         </div>
-
         <div class="vistas">
             <div class="row vista" id="vista_principal">
                 <div class="col-sm-11 offset-sm-1">
                     <div class="table-responsive">
-                        <table class="table table-striped table-hover " id="table-data">
+                        <table class="table table-striped table-hover " id="table-empleados">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
+                                    <th>Email</th>
                                     <th>Telefono</th>
-                                    <th>Correo</th>
-                                    <th>Permisos</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -51,7 +49,7 @@ require_once ("../../includes/_db.php");
     <?php require_once("../../includes/_footer.php"); ?>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="../../js/main.js"></script>
-    <script src="../../js/usuarios.js"></script>
+    <script src="../../js/empleados.js"></script>
 </div>
 </body>
 </html>

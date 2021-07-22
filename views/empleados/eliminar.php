@@ -12,7 +12,7 @@
         <div class="col-sm-4"></div>
         <div class=" col-sm-6 mb-1 ">
           
-            <h1>Eliminar Usuarios</h1>
+            <h1>Eliminar empleados</h1>
             
         </div>
         <div class="col-sm-11 ">
@@ -25,7 +25,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                             <form action="../../includes/_functions.php" method="POST">
-                                <input type="hidden" name="accion" value="eliminar_usuarios">
+                                <input type="hidden" name="accion" value="eliminar_empleados">
                                 <input type="hidden" name="id" value="<?php echo $_GET['id'];?>">
                                 <input type="submit" name="" value="eliminar" class="btn btn-success">
                                 <a href="./" class="btn btn-danger">Cancelar</a>
