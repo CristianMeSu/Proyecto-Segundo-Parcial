@@ -1,8 +1,8 @@
 <?php
 
-$host = "sql5.freemysqlhosting.net";
-$user = "sql5425622";
-$password = "xxBlTNGtUr";
+$host = "localhost";
+$user = "root";
+$password = "";
 $database = "sql5425622";
 $port = "3306";
 

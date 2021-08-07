@@ -139,8 +139,8 @@ function select_empleados(){
 function insertar_empleados(){
     global $conexion;
     extract($_POST);
-    $consulta = "INSERT INTO empleados ( nombre, email, password, tipo ) 
-    values ('$nombre', '$email', '$password', '$empleado')";
+    $consulta = "INSERT INTO municipios ( nombre , estado ) 
+    values ( '$nombre' , '$estado' )";
     $respuesta = [
         'type' => 'success',
         'title' => 'Operación exitosa',

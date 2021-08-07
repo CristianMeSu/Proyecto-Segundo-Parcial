@@ -14,7 +14,7 @@ function selectEmpleados(){
                 <tr style="Color:#FFFFFF">
                     <td>${a.id}</td>
                     <td><a href="#" style="color: #15A145" data-id="${a.id}" class="mostrar">${a.nombre}</a></td>
-                    <td>${a.email}</td>
+                    <td>${a.correo}</td>
                     <td>${a.password}</td>
                     <td>${a.tipo}</td>
                     <td>
